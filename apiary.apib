@@ -1,0 +1,226 @@
+FORMAT: 1A
+HOST: https://api.ngabarin.id/
+
+# Ngabarin Consumer API
+
+Penjelasan
+
+# Group Konektivitas Cloud
+
+## PING  [/ping]
+
+### PING [GET /ping]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+# Group Login dan Logout
+
+## Login [/login]
+
+### Login [POST /login]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Refresh Token [POST /login/refresh]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+## Logout [/logout]
+
+### Logout [POST /logout]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+# Group Data Pengguna
+
+## Mendapatkan Data Pengguna [/user]
+
+### Mendapatkan Minimal Data [GET /user]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Tertentu [GET /user?extends=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+## Update Data Pengguna [/user]
+
+### Melakukan Update Data Pengguna [POST /user]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Membuat Project Baru [PUT /user/new_projects]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+# Group Data Project
+
+## Mendapatkan Data Project
+
+### Mendapatkan Minimal Data [GET /project/{nama_project}]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Tertentu [GET /project/{nama_project}?extends=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Semua Data Pengguna [GET /project/{nama_project}?extends=all]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+## Update Data Project
+
+### Melakukan Update Data Project [POST /project/{nama_project}]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Membuat Project Baru [PUT /project/{nama_project}/new_data]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+# Group Data Sensor dan Aktuator
+
+## Mendapatkan Data Sensor
+
+### Mendapatkan Data Terbaru Semua Sensor [GET /project/{nama_project}/sensor]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Dalam Range Waktu Semua Sensor [GET /project/{nama_project}/sensor?from=&until=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Terbaru Spesifik Sensor [GET /project/{nama_project}/sensor/{nama_sensor}]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Dalam Range Waktu Spesifik Sensor [GET /project/{nama_project}/sensor/{nama_sensor}?from=&until=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+## Mengatur Data Aktuator
+
+### Mendapatkan Data Terbaru Semua Aktuator [GET /project/{nama_project}/actuator]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Dalam Range Waktu Semua Aktuator [GET /project/{nama_project}/actuator?from=&until=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Terbaru Spesifik Aktuator [GET /project/{nama_project}/actuator/{nama_aktuator}]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mendapatkan Data Dalam Range Waktu Spesifik Aktuator [GET /project/{nama_project}/actuator/{nama_aktuator}?from=&until=]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Mengubah Data Spesifik Aktuator [PUT /project/{nama_project}/actuator]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
