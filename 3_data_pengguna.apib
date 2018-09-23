@@ -41,20 +41,60 @@
         }
 
 
-### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
+### Mendapatkan Semua Data Pengguna [GET /user{?extends}]
+Gunakan parameter `extends=all` untuk mendapat semua data
+
++ Request (application/json)
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Parameters
+    + extends (optional) - List of extended information, separated by comma
+        + Default: all
 
 + Response 200 (application/json)
 
         {
-            "response": "OK"
+            "id": 1,
+            "username": "tegarimansyah",
+            "name": "Tegar Imansyah",
+            "email": "tegar@ngabarin.id",
+            "phone":"08123456789",
+            "address":"Sukolilo 19 Surabaya, Jawa Timur.",
+            "projects": [
+                { 
+                  "name":"Hidroponik",
+                  "slug": "hidroponik"
+                },
+                { 
+                  "name":"Smart Home",
+                  "slug": "smart-home"
+                }
+            ]
         }
 
 ### Update Data Pengguna [POST /user]
 
-+ Response 200 (application/json)
++ Request (application/json)
+    Isi body yang mau di update sesuai dengan nama parameternya
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
 
         {
-            "response": "OK"
+            "phone":"0123456789"  
+        }
+
+
++ Response 201 (application/json)
+
+        {
+            "response": "Data Updated"
         }
 
 
@@ -89,9 +129,23 @@
 
 ### Membuat Project Baru [PUT /user/projects]
 
-+ Response 200 (application/json)
++ Request (application/json)
+    Membuat project baru
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
 
         {
-            "response": "OK"
+            "Nama":"Surabaya Sanitasi"  
+        }
+
+
++ Response 201 (application/json)
+
+        {
+            "response": "Project Created"
         }
 
