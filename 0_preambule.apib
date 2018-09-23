@@ -11,6 +11,8 @@ Gunakan Ngabarin API Token pada setiap request.
 
 # Format Respon:
 
+Semua parameter dan key pada Request maupun Response menggunakan bahasa inggris dengan format snake case (huruf kecil yang dipisahkan dengan underscore).
+
 Sukses 200
 ```
 {
@@ -24,7 +26,7 @@ Gagal 400, 401, 403, 404
 {
     "result_code":1,
     "error_msg": "Registration Error",
-    "error_desc": "Registration error, username or password already used",
+    "error_desc": "Registration error, username or email already used",
     "error_info":  "http://docs.ngabarin.id/registration"
 }
 ```

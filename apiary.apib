@@ -9,29 +9,37 @@ menggunakan koneksi websocket atau webhook.
 
 Gunakan Ngabarin API Token pada setiap request.
 
-Format response:
+# Format Respon:
+
+Semua parameter dan key pada Request maupun Response menggunakan bahasa inggris dengan format snake case (huruf kecil yang dipisahkan dengan underscore).
+
 Sukses 200
+```
 {
     "id":1,
     "username": "tegarimansyah"
 }
+```
 
 Gagal 400, 401, 403, 404
 ```
 {
     "result_code":1,
     "error_msg": "Registration Error",
-    "error_desc": "Registration error, username or password already used",
+    "error_desc": "Registration error, username or email already used",
     "error_info":  "http://docs.ngabarin.id/registration"
 }
 ```
 
-200 ok
-201 created
-400 bad request
-401 unauthorized
-403 forbidden
-404 not found# Group Konektivitas Cloud
+| HTTP Code | Status | Meaning |
+|:---------:|--------------|:-----------------------------------------:|
+| 200 | OK | Request execute successfully |
+| 201 | Created | Request write on db successfully |
+| 400 | Bad Request | Invalid format, check docs |
+| 401 | Unauthorized | Use Authorization header or correct token |
+| 403 | Forbidden | The path is not belong to you |
+| 404 | Not Found | The path is not available |
+# Group Konektivitas Cloud
 
 ## PING  [/ping]
 
@@ -59,63 +67,192 @@ Gagal 400, 401, 403, 404
         
 # Group Login dan Logout
 
-## Login
+## Login [/login]
 
 ### Login [POST /login]
 
-### Refresh Token [POST /login/refresh]
++ Request (application/json)
+    Untuk mendapatkan token. Token digunakan untuk melakukan pemanggilan API lainnya.
 
-## Logout
+    + Body
 
-### Logout [POST /logout]
+            {
+                "username":"your_username",
+                "password":"password"
+            }
 
-# Group Data Pengguna
++ Response 200 (application/json)
 
-## Mendapatkan Data Pengguna
+        {
+            "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"Logged In"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Login Error",
+            "error_desc": "Login error, check your username or password",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }
+
+### Refresh Token [GET /login/refresh]
+
++ Request (application/json)
+    Untuk mendapatkan token sebelum expire. Token digunakan untuk melakukan pemanggilan API lainnya.
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Response 200 (application/json)
+
+        {
+            "token":"Exa123ddWeXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"New Token"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Refresh Error",
+            "error_desc": "Token invalid, please login.",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }
+
+## Logout [/logout]
+
+Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan token tidak dapat digunakan lagi hingga proses login ulang.
+
+### Logout [GET /logout]
+
++ Request (application/json)
+    Untuk menghapus akses token.
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Response 200 (application/json)
+
+        {
+            "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"Blacklisted"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Refresh Error",
+            "error_desc": "Token invalid, please login.",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }# Group Data Pengguna
+
+## Mendapatkan Data Pengguna [/user]
 
 ### Mendapatkan Minimal Data [GET /user]
 
-### Mendapatkan Data Tertentu [GET /user?extends=]
++ Response 200 (application/json)
 
-### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
-
-### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
-
-## Update Data Pengguna
-
-### Melakukan Update Data Pengguna [POST /user]
-
-### Membuat Project Baru [PUT /user/new_projects]# Group Data Pengguna
-
-## Mendapatkan Data Pengguna
-
-### Mendapatkan Minimal Data [GET /user]
+        {
+            "response": "OK"
+        }
 
 ### Mendapatkan Data Tertentu [GET /user?extends=]
 
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
 ### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
 
 ### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
 
-## Update Data Pengguna
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+## Update Data Pengguna [/user]
 
 ### Melakukan Update Data Pengguna [POST /user]
 
-### Membuat Project Baru [PUT /user/new_projects]# Group Data Project
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Membuat Project Baru [PUT /user/new_projects]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+        # Group Data Project
 
 ## Mendapatkan Data Project
 
 ### Mendapatkan Minimal Data [GET /project/{nama_project}]
 
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
 ### Mendapatkan Data Tertentu [GET /project/{nama_project}?extends=]
 
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
 ### Mendapatkan Semua Data Pengguna [GET /project/{nama_project}?extends=all]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
 
 ## Update Data Project
 
 ### Melakukan Update Data Project [POST /project/{nama_project}]
 
-### Membuat Project Baru [PUT /project/{nama_project}/new_data]# Group Data Sensor dan Aktuator
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+
+### Membuat Project Baru [PUT /project/{nama_project}/new_data]
+
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }# Group Data Sensor dan Aktuator
 
 ## Mendapatkan Data Sensor
 

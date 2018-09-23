@@ -1,29 +1,91 @@
 # Group Login dan Logout
 
-## Login
+## Login [/login]
 
 ### Login [POST /login]
 
-### Refresh Token [POST /login/refresh]
++ Request (application/json)
+    Untuk mendapatkan token. Token digunakan untuk melakukan pemanggilan API lainnya.
 
-## Logout
+    + Body
 
-### Logout [POST /logout]
+            {
+                "username":"your_username",
+                "password":"password"
+            }
 
-# Group Data Pengguna
++ Response 200 (application/json)
 
-## Mendapatkan Data Pengguna
+        {
+            "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"Logged In"
+        }
 
-### Mendapatkan Minimal Data [GET /user]
++ Response 403 (application/json)
 
-### Mendapatkan Data Tertentu [GET /user?extends=]
+        {
+            "result_code":1,
+            "error_msg": "Login Error",
+            "error_desc": "Login error, check your username or password",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }
 
-### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
+### Refresh Token [GET /login/refresh]
 
-### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
++ Request (application/json)
+    Untuk mendapatkan token sebelum expire. Token digunakan untuk melakukan pemanggilan API lainnya.
 
-## Update Data Pengguna
+    + Header
 
-### Melakukan Update Data Pengguna [POST /user]
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
-### Membuat Project Baru [PUT /user/new_projects]
++ Response 200 (application/json)
+
+        {
+            "token":"Exa123ddWeXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"New Token"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Refresh Error",
+            "error_desc": "Token invalid, please login.",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }
+
+## Logout [/logout]
+
+Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan token tidak dapat digunakan lagi hingga proses login ulang.
+
+### Logout [GET /logout]
+
++ Request (application/json)
+    Untuk menghapus akses token.
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Response 200 (application/json)
+
+        {
+            "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "token_expire": "2019-07-01T14:54:54-04:00",
+            "token_expire_unix": 1562007294000,
+            "status":"Blacklisted"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Refresh Error",
+            "error_desc": "Token invalid, please login.",
+            "error_info":  "http://docs.ngabarin.id/login"
+        }
