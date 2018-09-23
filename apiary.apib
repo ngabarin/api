@@ -45,7 +45,8 @@ Gagal 400, 401, 403, 404
 ## PING  [/ping]
 
 ### PING [GET /ping]
-+ Requests 
+
++ Request (application/json)
 
     + Headers
     
@@ -107,7 +108,7 @@ Gagal 400, 401, 403, 404
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
@@ -138,7 +139,7 @@ Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan t
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
@@ -168,7 +169,7 @@ Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan t
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
@@ -184,52 +185,134 @@ Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan t
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
-    + Parameters
-        + extends (optional) - List of extended information, separated by comma
-            + Default: "key, token"
++ Parameters
+    + extends: email,phone (optional) - List of extended information, separated by comma or comma URL encode `%2C`
 
 + Response 200 (application/json)
 
         {
             "id": 1,
             "username": "tegarimansyah",
-            "name": "Tegar Imansyah"
+            "name": "Tegar Imansyah",
+            "email": "tegar@ngabarin.id",
+            "phone":"08123456789"
         }
 
-### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
+
+### Mendapatkan Semua Data Pengguna [GET /user{?extends}]
+
++ Request (application/json)
+    Gunakan parameter `extends=all` untuk mendapat semua data
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Parameters
+    + extends: all (optional) - List of extended information, separated by comma
 
 + Response 200 (application/json)
 
         {
-            "response": "OK"
+            "id": 1,
+            "username": "tegarimansyah",
+            "name": "Tegar Imansyah",
+            "email": "tegar@ngabarin.id",
+            "phone":"08123456789",
+            "address":"Sukolilo 19 Surabaya, Jawa Timur.",
+            "projects": [
+                { 
+                  "name":"Hidroponik",
+                  "slug": "hidroponik"
+                },
+                { 
+                  "name":"Smart Home",
+                  "slug": "smart-home"
+                }
+            ]
         }
 
-### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
+### Update Data Pengguna [POST /user]
+
++ Request (application/json)
+    Isi body yang mau di update sesuai dengan nama parameternya
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
+
+            {
+                "phone":"0123456789"  
+            }
+
+
++ Response 201 (application/json)
+
+        {
+            "response": "Data Updated",
+            "data": {
+                "phone":"0123456789"
+            }
+        }
+
+
+## Project Pengguna [/projects]
+
+
+### Mendapatkan Semua Project Pengguna [GET /user/projects]
+
++ Request (application/json)
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
         {
-            "response": "OK"
+            "id": 1,
+            "username": "tegarimansyah",
+            "projects": [
+                { 
+                  "name":"Hidroponik",
+                  "slug": "hidroponik"
+                },
+                { 
+                  "name":"Smart Home",
+                  "slug": "smart-home"
+                }
+            ]
         }
 
-## Update Data Pengguna [/userd]
 
-### Melakukan Update Data Pengguna [POST /user]
+### Membuat Project Baru [PUT /user/projects]
 
-+ Response 200 (application/json)
++ Request (application/json)
+    Membuat project baru
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
+
+            {
+                "name":"Surabaya Sanitasi"  
+            }
+
+
++ Response 201 (application/json)
 
         {
-            "response": "OK"
-        }
-
-### Membuat Project Baru [PUT /user/new_projects]
-
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
+            "project": {
+                "name":"Surabaya Sanitasi",
+                "slug": "surabaya-sanitasi"
+            },
+            "response": "Project Created"
         }
 
 # Group Data Project
@@ -238,44 +321,144 @@ Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan t
 
 ### Mendapatkan Minimal Data [GET /project/{nama_project}]
 
-+ Response 200 (application/json)
++ Request (application/json)
 
-        {
-            "response": "OK"
-        }
+    + Header
 
-### Mendapatkan Data Tertentu [GET /project/{nama_project}?extends=]
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
-+ Response 200 (application/json)
++ Parameters
+    + nama_project - Slug dari project. Slug dapat dilihat pada API `/user/projects`.
 
-        {
-            "response": "OK"
-        }
-
-### Mendapatkan Semua Data Pengguna [GET /project/{nama_project}?extends=all]
 
 + Response 200 (application/json)
 
         {
-            "response": "OK"
+            "id": 1,
+            "name": "Nama Project",
+            "username": "nama_project",
+            "key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg"
         }
 
-## Update Data Project [/projectd]
+### Mendapatkan Data Tertentu [GET /project/{nama_project}{?extends}]
+
++ Request (application/json)
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Parameters
+    + nama_project - Slug dari project. Slug dapat dilihat pada API `/user/projects`.
+    + extends: address (optional) - List of extended information, separated by comma or comma URL encode `%2C`
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Nama Project",
+            "username": "nama_project",
+            "key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "address": "Jl. Keputih, Surabaya Jawa Timur"
+        }
+
+### Mendapatkan Semua Data Project [GET /project/{nama_project}{?extends}]
+
++ Request (application/json)
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Parameters
+    + nama_project - Slug dari project. Slug dapat dilihat pada API `/user/projects`.
+    + extends: address (optional) - List of extended information, separated by comma or comma URL encode `%2C`
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Nama Project",
+            "username": "nama_project",
+            "key": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg",
+            "address": "Jl. Keputih, Surabaya Jawa Timur"
+        }
 
 ### Melakukan Update Data Project [POST /project/{nama_project}]
 
-+ Response 200 (application/json)
++ Request (application/json)
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
+            {
+                "name":"Surabaya Project"
+            }
+
++ Parameters
+    + nama_project - Slug dari project. Slug dapat dilihat pada API `/user/projects`.
+
++ Response 201 (application/json)
 
         {
-            "response": "OK"
+            "response": "Data Updated",
+            "data": {
+                "name":"Surabaya Project"
+            }
         }
 
-### Membuat Project Baru [PUT /project/{nama_project}/new_data]
+### Membuat Rekam Data Sensor Baru [PUT /project/{nama_project}/new_data]
 
-+ Response 200 (application/json)
++ Request (application/json)
+    Membuat project baru
+
+    + Header
+
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
+    + Body
+
+            {
+                "gateway":"Sukolilo",
+                "device":"sensor1",
+                "loc":"-7.4564989,112.6766626",
+                "data": [
+                    {
+                        "name":"Sensor Panas",
+                        "value":"20"
+                    },
+                    {
+                        "name":"Sensor PH",
+                        "value":"5.3"
+                    }
+                ]
+            }
+
++ Response 201 (application/json)
 
         {
-            "response": "OK"
+            "response": "Data Recorded",
+            "new_record": {
+                "gateway":"Sukolilo",
+                "gateway_id":3,
+                "device":"sensor1",
+                "device_id":2,
+                "loc":"-7.4564989,112.6766626",
+                "data": [
+                    {
+                        "id":744,
+                        "name":"Sensor Panas",
+                        "value":"20"
+                    },
+                    {
+                        "id":745,
+                        "name":"Sensor PH",
+                        "value":"5.3"
+                    }
+                ]
+            }
         }
 
 # Group Data Sensor dan Aktuator

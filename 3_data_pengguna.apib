@@ -8,7 +8,7 @@
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
@@ -24,11 +24,10 @@
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Parameters
-    + extends (optional) - List of extended information, separated by comma
-        + Default: email,phone
+    + extends: email,phone (optional) - List of extended information, separated by comma or comma URL encode `%2C`
 
 + Response 200 (application/json)
 
@@ -42,17 +41,16 @@
 
 
 ### Mendapatkan Semua Data Pengguna [GET /user{?extends}]
-Gunakan parameter `extends=all` untuk mendapat semua data
 
 + Request (application/json)
+    Gunakan parameter `extends=all` untuk mendapat semua data
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Parameters
-    + extends (optional) - List of extended information, separated by comma
-        + Default: all
+    + extends: all (optional) - List of extended information, separated by comma
 
 + Response 200 (application/json)
 
@@ -82,19 +80,22 @@ Gunakan parameter `extends=all` untuk mendapat semua data
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
     + Body
 
-        {
-            "phone":"0123456789"  
-        }
+            {
+                "phone":"0123456789"  
+            }
 
 
 + Response 201 (application/json)
 
         {
-            "response": "Data Updated"
+            "response": "Data Updated",
+            "data": {
+                "phone":"0123456789"
+            }
         }
 
 
@@ -107,7 +108,7 @@ Gunakan parameter `extends=all` untuk mendapat semua data
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
 + Response 200 (application/json)
 
@@ -134,18 +135,22 @@ Gunakan parameter `extends=all` untuk mendapat semua data
 
     + Header
 
-        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+                NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
     + Body
 
-        {
-            "Nama":"Surabaya Sanitasi"  
-        }
+            {
+                "name":"Surabaya Sanitasi"  
+            }
 
 
 + Response 201 (application/json)
 
         {
+            "project": {
+                "name":"Surabaya Sanitasi",
+                "slug": "surabaya-sanitasi"
+            },
             "response": "Project Created"
         }
 
