@@ -26,25 +26,20 @@
 
         NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
 
-    + Parameters
-        + extends (optional) - List of extended information, separated by comma
-            + Default: "key, token"
++ Parameters
+    + extends (optional) - List of extended information, separated by comma
+        + Default: email,phone
 
 + Response 200 (application/json)
 
         {
             "id": 1,
             "username": "tegarimansyah",
-            "name": "Tegar Imansyah"
+            "name": "Tegar Imansyah",
+            "email": "tegar@ngabarin.id",
+            "phone":"08123456789"
         }
 
-### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
-
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
 
 ### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
 
@@ -54,9 +49,7 @@
             "response": "OK"
         }
 
-## Update Data Pengguna [/userd]
-
-### Melakukan Update Data Pengguna [POST /user]
+### Update Data Pengguna [POST /user]
 
 + Response 200 (application/json)
 
@@ -64,7 +57,37 @@
             "response": "OK"
         }
 
-### Membuat Project Baru [PUT /user/new_projects]
+
+## Project Pengguna [/projects]
+
+
+### Mendapatkan Semua Project Pengguna [GET /user/projects]
+
++ Request (application/json)
+
+    + Header
+
+        NGABARIN-TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzcyODQ3NTgsImlhdCI6MTUzNzE5ODMzOCwic3ViIjoxfQ.PgUyBkJhoOmTBny2aetjzpS-R2NS_H1E1KcC90iyaXg
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "username": "tegarimansyah",
+            "projects": [
+                { 
+                  "name":"Hidroponik",
+                  "slug": "hidroponik"
+                },
+                { 
+                  "name":"Smart Home",
+                  "slug": "smart-home"
+                }
+            ]
+        }
+
+
+### Membuat Project Baru [PUT /user/projects]
 
 + Response 200 (application/json)
 
