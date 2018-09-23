@@ -3,153 +3,119 @@ HOST: https://api.ngabarin.id/
 
 # Ngabarin Consumer API
 
-Penjelasan
+Dokumen ini digunakan untuk mengintegrasikan layanan ngabarin dengan website atau 
+aplikasi anda menggunakan REST API. Untuk mendapatkan data secara real time, bisa
+menggunakan koneksi websocket atau webhook.
 
-# Group Konektivitas Cloud
+Gunakan Ngabarin API Token pada setiap request.
+
+Format response:
+Sukses 200
+{
+    "id":1,
+    "username": "tegarimansyah"
+}
+
+Gagal 400, 401, 403, 404
+```
+{
+    "result_code":1,
+    "error_msg": "Registration Error",
+    "error_desc": "Registration error, username or password already used",
+    "error_info":  "http://docs.ngabarin.id/registration"
+}
+```
+
+200 ok
+201 created
+400 bad request
+401 unauthorized
+403 forbidden
+404 not found# Group Konektivitas Cloud
 
 ## PING  [/ping]
 
 ### PING [GET /ping]
++ Requests 
 
+    + Headers
+    
+            NGABARIN-TOKEN: NGABARIN-USER-TOKEN
+            
 + Response 200 (application/json)
 
         {
             "response": "OK"
         }
+        
++ Response 403 (application/json)
 
+        {
+            "result_code":1,
+            "error_msg": "Unauthorized",
+            "error_desc": "Unauthorized data request",
+            "error_info":  "https://ngabarin.docs.apiary.io/#reference/login-dan-logout"
+        }
+        
 # Group Login dan Logout
 
-## Login [/login]
+## Login
 
 ### Login [POST /login]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 ### Refresh Token [POST /login/refresh]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
-## Logout [/logout]
-
-Dengan melakukan proses logout, server akan menandai berakhirnya sesi user dan token tidak dapat digunakan lagi hingga proses login ulang.
+## Logout
 
 ### Logout [POST /logout]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 # Group Data Pengguna
 
-## Mendapatkan Data Pengguna [/user]
+## Mendapatkan Data Pengguna
 
 ### Mendapatkan Minimal Data [GET /user]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 ### Mendapatkan Data Tertentu [GET /user?extends=]
-
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
 
 ### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 ### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
-## Update Data Pengguna [/user]
+## Update Data Pengguna
 
 ### Melakukan Update Data Pengguna [POST /user]
 
-+ Response 200 (application/json)
+### Membuat Project Baru [PUT /user/new_projects]# Group Data Pengguna
 
-        {
-            "response": "OK"
-        }
+## Mendapatkan Data Pengguna
 
-### Membuat Project Baru [PUT /user/new_projects]
+### Mendapatkan Minimal Data [GET /user]
 
-+ Response 200 (application/json)
+### Mendapatkan Data Tertentu [GET /user?extends=]
 
-        {
-            "response": "OK"
-        }
+### Mendapatkan Semua Project Pengguna [GET /user?extends=projects]
 
-# Group Data Project
+### Mendapatkan Semua Data Pengguna [GET /user?extends=all]
+
+## Update Data Pengguna
+
+### Melakukan Update Data Pengguna [POST /user]
+
+### Membuat Project Baru [PUT /user/new_projects]# Group Data Project
 
 ## Mendapatkan Data Project
 
 ### Mendapatkan Minimal Data [GET /project/{nama_project}]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 ### Mendapatkan Data Tertentu [GET /project/{nama_project}?extends=]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
 ### Mendapatkan Semua Data Pengguna [GET /project/{nama_project}?extends=all]
-
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
 
 ## Update Data Project
 
 ### Melakukan Update Data Project [POST /project/{nama_project}]
 
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
-### Membuat Project Baru [PUT /project/{nama_project}/new_data]
-
-+ Response 200 (application/json)
-
-        {
-            "response": "OK"
-        }
-
-# Group Data Sensor dan Aktuator
+### Membuat Project Baru [PUT /project/{nama_project}/new_data]# Group Data Sensor dan Aktuator
 
 ## Mendapatkan Data Sensor
 

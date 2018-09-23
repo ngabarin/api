@@ -1,0 +1,26 @@
+# Group Konektivitas Cloud
+
+## PING  [/ping]
+
+### PING [GET /ping]
++ Requests 
+
+    + Headers
+    
+            NGABARIN-TOKEN: NGABARIN-USER-TOKEN
+            
++ Response 200 (application/json)
+
+        {
+            "response": "OK"
+        }
+        
++ Response 403 (application/json)
+
+        {
+            "result_code":1,
+            "error_msg": "Unauthorized",
+            "error_desc": "Unauthorized data request",
+            "error_info":  "https://ngabarin.docs.apiary.io/#reference/login-dan-logout"
+        }
+        

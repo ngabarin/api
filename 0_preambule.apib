@@ -1,0 +1,34 @@
+FORMAT: 1A
+HOST: https://api.ngabarin.id/
+
+# Ngabarin Consumer API
+
+Dokumen ini digunakan untuk mengintegrasikan layanan ngabarin dengan website atau 
+aplikasi anda menggunakan REST API. Untuk mendapatkan data secara real time, bisa
+menggunakan koneksi websocket atau webhook.
+
+Gunakan Ngabarin API Token pada setiap request.
+
+Format response:
+Sukses 200
+{
+    "id":1,
+    "username": "tegarimansyah"
+}
+
+Gagal 400, 401, 403, 404
+```
+{
+    "result_code":1,
+    "error_msg": "Registration Error",
+    "error_desc": "Registration error, username or password already used",
+    "error_info":  "http://docs.ngabarin.id/registration"
+}
+```
+
+200 ok
+201 created
+400 bad request
+401 unauthorized
+403 forbidden
+404 not found
